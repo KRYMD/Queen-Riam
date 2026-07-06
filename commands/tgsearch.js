@@ -86,7 +86,7 @@ async function tgsearchCommand(sock, chatId, message, query) {
             text += '\n';
         });
 
-        text += `\n_Powered by Queen Riam_`;
+        text += `\n_Powered by NEGO NEXUS_`;
 
         await sock.sendMessage(chatId, { text }, { quoted: getFakeVcard() });
         await sock.sendMessage(chatId, { react: { text: '✅', key: message.key } });

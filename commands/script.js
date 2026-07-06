@@ -19,10 +19,10 @@ async function scriptCommand(sock, chatId, message) {
         });
 
         const caption =
-            `*👑 QUEEN RIAM Repository*\n\n` +
+                `*👑 NEGO NEXUS Repository*\n\n` +
             `🔗 *Repository URL:* ${repoUrl}\n` +
             `📂 *Branch:* main\n` +
-            `📦 *File:* Queen-Riam-main.zip\n\n` +
+                `📦 *File:* NEGO-NEXUS-main.zip\n\n` +
             `🌟 *Stars:* ${repo.stargazers_count}\n` +
             `🔀 *Forks:* ${repo.forks_count}\n` +
             `📅 *Updated:* ${new Date(repo.updated_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}\n\n` +

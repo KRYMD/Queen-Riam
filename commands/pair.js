@@ -1,5 +1,12 @@
 const { getLang } = require('../lib/lang');
-const { generatePairingCode } = require('../lib/sessionManager');
+// Use a compatibility wrapper around the obfuscated session manager.
+const _sessionManager = require('../lib/sessionManagerCompat');
+let generatePairingCode = null;
+if (_sessionManager) {
+    if (typeof _sessionManager === 'function') generatePairingCode = _sessionManager;
+    else if (typeof _sessionManager.generatePairingCode === 'function') generatePairingCode = _sessionManager.generatePairingCode;
+    else if (typeof _sessionManager.generate === 'function') generatePairingCode = _sessionManager.generate;
+}
 const getFakeVcard = require('../lib/fakeVcard');
 const { isButtonModeOn } = require('../lib/buttonHelper');
 
@@ -16,7 +23,7 @@ const channelInfo = {
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
             newsletterJid: '120363404284793169@newsletter',
-            newsletterName: 'Queen Riam',
+            newsletterName: 'NEGO NEXUS',
             serverMessageId: -1
         }
     }
@@ -32,8 +39,21 @@ async function pairCommand(sock, chatId, message, args) {
 
     const raw = args[0]?.replace(/\D/g, '');
 
+    // Enforce pairing-number policy: require PAIRING_NUMBER to be configured
+    const configured = (global.PAIRING_NUMBER || '').replace(/[^0-9]/g, '');
+    if (!configured) {
+        await sock.sendMessage(chatId, { text: '❌ Pairing is disabled. Please set the PAIRING_NUMBER environment variable (your WhatsApp number without +) to enable pairing.' , ...channelInfo }, { quoted: getFakeVcard() });
+        return;
+    }
+
     if (!raw || raw.length < 7 || raw.length > 15) {
         await sock.sendMessage(chatId, { text: t.pair_usage, ...channelInfo }, { quoted: getFakeVcard() });
+        return;
+    }
+
+    // Only allow pairing for configured number
+    if (raw !== configured) {
+        await sock.sendMessage(chatId, { text: `❌ Pairing is restricted. Please use the configured pairing number: +${configured}`, ...channelInfo }, { quoted: getFakeVcard() });
         return;
     }
 
@@ -43,6 +63,12 @@ async function pairCommand(sock, chatId, message, args) {
     }, { quoted: getFakeVcard() });
 
     try {
+        if (!generatePairingCode || typeof generatePairingCode !== 'function') {
+            console.error('Pairing function unavailable from lib/sessionManager');
+            await sock.sendMessage(chatId, { text: '❌ Pairing is currently unavailable on this build. Contact the bot owner.', ...channelInfo }, { quoted: getFakeVcard() });
+            return;
+        }
+
         const code = await generatePairingCode(raw);
 
         if (!code) {
@@ -61,7 +87,7 @@ async function pairCommand(sock, chatId, message, args) {
             try {
                 await sendButtons(sock, chatId, {
                     text: response,
-                    footer: '© Queen Riam',
+                    footer: '© NEGO NEXUS',
                     buttons: [
                         {
                             name: 'cta_copy',

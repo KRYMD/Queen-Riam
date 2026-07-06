@@ -35,7 +35,7 @@ async function pingCommand(sock, chatId, message) {
         const response =
             `*${t.ping_pong}*\n` +
             `${t.ping_response} *${latency}* ${t.ping_seconds}\n\n` +
-            `*💻 ${settings.botName || "Queen Riam"}* ${t.ping_server_info}\n` +
+            `*💻 ${settings.botName || "NEGO NEXUS"}* ${t.ping_server_info}\n` +
             `${t.ping_ram} *${ramUsage}*\n` +
             `${t.ping_cores} *${cpus.length}*\n` +
             `${t.ping_speed} *${(cpu.speed / cpus.length).toFixed(2)} MHz*`;
@@ -43,7 +43,7 @@ async function pingCommand(sock, chatId, message) {
         if (isButtonModeOn()) {
             await sendButtonMessage(sock, chatId, {
                 text: response,
-                footer: `${settings.botName || "Queen Riam"} 👑`,
+                footer: `${settings.botName || "NEGO NEXUS"} 👑`,
                 buttons: [
                     { id: '.alive', text: t.ping_alive_btn },
                 ],
@@ -55,7 +55,7 @@ async function pingCommand(sock, chatId, message) {
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
                         newsletterJid: "120363404284793169@newsletter",
-                        newsletterName: settings.botName || "Queen Riam",
+                        newsletterName: settings.botName || "NEGO NEXUS",
                         serverMessageId: -1
                     }
                 }

@@ -103,7 +103,7 @@ async function xnxxCommand(sock, chatId, query, message) {
                 }
 
                 const title = info.title || video.title || "XNXX Video";
-                const caption = "🎬 *" + title + "*\n🔞 *18+ Only*\n\n> *_Downloaded by Queen Riam_*";
+                const caption = "🎬 *" + title + "*\n🔞 *18+ Only*\n\n> *_Downloaded by NEGO NEXUS_*";
 
                 if (info.thumbnail) {
                     await sock.sendMessage(chatId, {

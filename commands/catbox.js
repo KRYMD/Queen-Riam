@@ -72,7 +72,7 @@ async function catboxCommand(sock, chatId, message) {
             "\u2502 \u2192 \u{1F517} *LINK:* " + link + "\n" +
             "\u2502 \u2192 \u23F3 *EXPIRY:* No Expiry\n" +
             "\u2514\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\n" +
-            "> *POWERED BY QUEEN RIAM*";
+            "> *POWERED BY NEGO NEXUS*";
 
         await sock.sendMessage(chatId, { text: reply }, { quoted: message });
         await sock.sendMessage(chatId, { react: { text: "\u2705", key: message.key } });

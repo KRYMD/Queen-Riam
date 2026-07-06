@@ -38,7 +38,7 @@ async function stickerCommand(sock, chatId, message) {
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
                     newsletterJid: '120363404284793169@newsletter',
-                    newsletterName: 'Queen Riam',
+                    newsletterName: 'NEGO NEXUS',
                     serverMessageId: -1
                 }
             }
@@ -60,7 +60,7 @@ async function stickerCommand(sock, chatId, message) {
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
                         newsletterJid: '120363404284793169@newsletter',
-                        newsletterName: 'Queen Riam',
+                        newsletterName: 'NEGO NEXUS',
                         serverMessageId: -1
                     }
                 }

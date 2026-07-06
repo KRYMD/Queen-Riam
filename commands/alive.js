@@ -36,7 +36,7 @@ async function aliveCommand(sock, chatId, message) {
 
         const aliveMessage =
             `👋 \`\`\` ${greeting} \`\`\`\n\n` +
-            `_*${settings.botName || "Queen Riam"} ${t.alive_subtitle}*_\n\n` +
+                `_*${settings.botName || "NEGO NEXUS"} ${t.alive_subtitle}*_\n\n` +
             `${t.alive_system_status}\n` +
             `> ${t.alive_version} ${settings.version}\n` +
             `> ${t.alive_memory} ${usedMemory}MB / ${totalMemory}GB\n` +
@@ -45,16 +45,16 @@ async function aliveCommand(sock, chatId, message) {
             `> ${platformEmoji} ${t.alive_platform} ${host}\n` +
             `> ${t.alive_node} ${nodeVersion}\n\n` +
             `📢 Channel: https://whatsapp.com/channel/0029Va8YUl50bIdtVMYnYd0E\n\n` +
-            `*${settings.botName || "Queen Riam"} ${t.alive_online}*\n\n` +
+                `*${settings.botName || "NEGO NEXUS"} ${t.alive_online}*\n\n` +
             `> ${t.alive_powered} ${settings.ownerName || "Héctor Manuel"} 👑`;
 
         if (isButtonModeOn()) {
             await sendButtonMessage(sock, chatId, {
                 text: aliveMessage,
                 footer: `${settings.botName || "Queen Riam"} 👑`,
-                buttons: [
-                    { id: '.ping', text: t.alive_ping_btn },
-                ],
+                    buttons: [
+                        { id: '.ping', text: t.alive_ping_btn },
+                    ],
             }, message);
         } else {
             let imageBuffer;
@@ -77,7 +77,7 @@ async function aliveCommand(sock, chatId, message) {
         const t = getLang(sock);
         const errMsg = t.alive_error.replace('{runtime}', runtime(process.uptime()));
         await sock.sendMessage(chatId, {
-            text: `🤖 *${settings.botName || "Queen Riam"} ${errMsg}*`
+                text: `🤖 *${settings.botName || "NEGO NEXUS"} ${errMsg}*`
         }, { quoted: getFakeVcard() });
         await sock.sendMessage(chatId, { react: { text: "⚠️", key: message.key } });
     }

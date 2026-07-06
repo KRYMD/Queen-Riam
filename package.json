@@ -1,5 +1,5 @@
 {
-  "name": "Queen Riam",
+  "name": "nego-nexus",
   "version": "3.0.0",
   "description": "WhatsApp Bot",
   "main": "index.js",
@@ -7,8 +7,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docker:build": "docker build -t queenriam .",
-    "docker:run": "docker run -e SESSION_ID=$SESSION_ID queenriam"
+    "docker:build": "docker build -t nego-nexus .",
+    "docker:run": "docker run -e SESSION_ID=$SESSION_ID nego-nexus"
   },
   "keywords": [
     "whatsapp-bot"
@@ -16,8 +16,8 @@
   "author": "Hector Manuel",
   "license": "ISC",
   "engines": {
-    "node": "20.x",
-    "npm": "10.x"
+    "node": ">=20",
+    "npm": ">=10"
   },
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",

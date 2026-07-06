@@ -26,7 +26,7 @@ async function eightBallCommand(sock, chatId, question, message) {
 
     await sendButtonMessage(sock, chatId, {
         text,
-        footer: 'Queen Riam 👑',
+        footer: 'NEGO NEXUS 👑',
         buttons: [
             { id: `.8ball ${question}`, text: getLang(sock).eightball_btn_again },
         ],

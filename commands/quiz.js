@@ -69,7 +69,7 @@ async function quizCommand(sock, chatId, args, message, userId) {
                 }));
                 await sendButtons(sock, chatId, {
                     text,
-                    footer: 'Queen Riam 👑',
+                    footer: 'NEGO NEXUS 👑',
                     buttons,
                     quoted: getFakeVcard(),
                 });
@@ -228,7 +228,7 @@ async function showResults(sock, chatId, userId, lastFeedback, message) {
     if (isButtonModeOn()) {
         await sendButtonMessage(sock, chatId, {
             text,
-            footer: 'Queen Riam 👑',
+            footer: 'NEGO NEXUS 👑',
             buttons: [
                 { id: `.quiz ${category}`, text: `🔄 Play ${categoryNames[category]} Again` },
                 { id: '.quiz',             text: '📂 Pick Category' },
@@ -259,7 +259,7 @@ async function endQuiz(sock, chatId, message, userId) {
     if (isButtonModeOn()) {
         await sendButtonMessage(sock, chatId, {
             text,
-            footer: 'Queen Riam 👑',
+            footer: 'NEGO NEXUS 👑',
             buttons: [
                 { id: '.quiz', text: '🧠 New Quiz' },
             ],

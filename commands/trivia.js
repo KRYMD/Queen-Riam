@@ -65,7 +65,7 @@ async function startTrivia(sock, chatId, message) {
                 }));
                 await sendButtons(sock, chatId, {
                     text,
-                    footer: 'Queen Riam 👑 — Tap your answer!',
+                    footer: 'NEGO NEXUS 👑 — Tap your answer!',
                     buttons,
                     quoted: getFakeVcard(),
                 });
@@ -107,7 +107,7 @@ async function answerTrivia(sock, chatId, answer, message) {
     if (isButtonModeOn()) {
         await sendButtonMessage(sock, chatId, {
             text,
-            footer: 'Queen Riam 👑',
+            footer: 'NEGO NEXUS 👑',
             buttons: [
                 { id: '.trivia', text: '🧠 Next Question' },
             ],

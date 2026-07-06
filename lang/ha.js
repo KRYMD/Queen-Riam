@@ -184,7 +184,7 @@ module.exports = {
   dl_duration: "⏱ Tsawon Lokaci:",
   dl_views: "👁 Ra'ayi:",
   dl_quality: "📌 Inganci:",
-  dl_downloaded_by: "An sauke ta hanyar Queen Riam",
+  dl_downloaded_by: "An sauke ta hanyar NEGO NEXUS",
   tts_no_text: "❌ Don Allah ba da rubutu don canza shi zuwa sauti.",
   tts_error_gen: "❌ Kuskure yayin samar da sauti na TTS.",
   tts_failed_send: "❌ Aika sauti na TTS ya kasa.",

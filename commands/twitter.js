@@ -73,7 +73,7 @@ async function twitterCommand(sock, chatId, message) {
         await sock.sendMessage(chatId, {
             video: { url: tempFile },
             mimetype: 'video/mp4',
-            caption: `*${title}*\n📐 Quality: ${quality}\n\n📥 Downloaded by Queen Riam`
+            caption: `*${title}*\n📐 Quality: ${quality}\n\n📥 Downloaded by NEGO NEXUS`
         }, { quoted: getFakeVcard() });
 
         try { fs.unlinkSync(tempFile); } catch (_) {}

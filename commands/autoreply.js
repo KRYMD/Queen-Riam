@@ -108,7 +108,7 @@ async function autoreplyCommand(sock, chatId, message, args, rawQuery) {
         if (isButtonModeOn()) {
             await sendButtonMessage(sock, chatId, {
                 text,
-                footer: 'Queen Riam 👑',
+                footer: 'NEGO NEXUS 👑',
                 buttons: [
                     { id: '.autoreply on',  text: getLang(sock).btn_turn_on  },
                     { id: '.autoreply off', text: getLang(sock).btn_turn_off },

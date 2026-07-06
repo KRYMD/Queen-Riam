@@ -88,7 +88,7 @@ async function handleAntideleteCommand(sock, chatId, message, match) {
         if (isButtonModeOn()) {
             return sendButtonMessage(sock, chatId, {
                 text,
-                footer: 'Queen Riam 👑',
+                footer: 'NEGO NEXUS 👑',
                 buttons: [
                     { id: '.antidelete on',  text: getLang(sock).btn_turn_on  },
                     { id: '.antidelete off', text: getLang(sock).btn_turn_off },

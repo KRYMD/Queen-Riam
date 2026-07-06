@@ -203,7 +203,7 @@ async function helpCommand(sock, chatId, message, _, subCategory) {
             try {
                 const opts = {
                     text: catText,
-                    footer: '© Queen Riam',
+                    footer: '© NEGO NEXUS',
                     buttons: [
                         { id: '.help', text: getLang(sock).help_back_btn },
                     ],
@@ -232,7 +232,7 @@ async function helpCommand(sock, chatId, message, _, subCategory) {
 
             const opts = {
                 text: menuText,
-                footer: '© Queen Riam',
+                footer: '© NEGO NEXUS',
                 buttons,
                 quoted: getFakeVcard(),
                 contextInfo: channelCtx,

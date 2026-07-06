@@ -28,13 +28,14 @@ async function githubCommand(sock, chatId, message) {
         txt += `📦 *Size:* ${(repo.size / 1024).toFixed(2)} MB\n`;
         txt += `📅 *Last Updated:* ${moment(repo.updated_at).format('DD/MM/YY - HH:mm:ss')}\n\n`;
         txt += `👨‍💻 *Developer:* ${repo.owner.login}\n\n`;
-        txt += `💥 *QUEEN RIAM*`;
+            txt += `💥 *NEGO NEXUS*`;
 
         if (isButtonModeOn() && sendButtons) {
             try {
                 await sendButtons(sock, chatId, {
                     text: txt,
                     footer: 'Queen Riam 👑',
+                        footer: 'NEGO NEXUS 👑',
                     quoted: getFakeVcard(),
                     buttons: [
                         {
@@ -80,6 +81,8 @@ async function repoZipCommand(sock, chatId, message) {
             mimetype: 'application/zip',
             fileName: 'Queen-Riam.zip',
             caption: '📦 *Queen Riam* — Source Code\n\n⭐ Star the repo: https://github.com/Dev-Kango/Queen-Riam',
+                fileName: 'NEGO-NEXUS.zip',
+                caption: '📦 *NEGO NEXUS* — Source Code\n\n⭐ Star the repo: https://github.com/Dev-Kango/Queen-Riam',
         }, { quoted: getFakeVcard() });
 
         await sock.sendMessage(chatId, { react: { text: '✅', key: message.key } });

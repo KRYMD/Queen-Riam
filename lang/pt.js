@@ -184,7 +184,7 @@ module.exports = {
   dl_duration: "⏱ Duração:",
   dl_views: "👁 Visualizações:",
   dl_quality: "📌 Qualidade:",
-  dl_downloaded_by: "Baixado por Queen Riam",
+  dl_downloaded_by: "Baixado por NEGO NEXUS",
   tts_no_text: "❌ Por favor forneça o texto para conversão TTS.",
   tts_error_gen: "❌ Erro ao gerar áudio TTS.",
   tts_failed_send: "❌ Falha ao enviar áudio TTS.",

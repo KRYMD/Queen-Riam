@@ -40,7 +40,7 @@ async function ytplayCommand(sock, chatId, query, message) {
             contextInfo: {
                 externalAdReply: {
                     title: finalTitle,
-                    body: '🎶 Powered by Queen Riam',
+                    body: '🎶 Powered by NEGO NEXUS',
                     thumbnailUrl: finalThumb,
                     sourceUrl: ytUrl,
                     mediaType: 1,

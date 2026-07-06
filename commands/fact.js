@@ -10,7 +10,7 @@ module.exports = async function (sock, chatId, message) {
 
         await sendButtonMessage(sock, chatId, {
             text,
-            footer: 'Queen Riam 👑',
+            footer: 'NEGO NEXUS 👑',
             buttons: [
                 { id: '.fact',  text: getLang(sock).fact_btn_another },
                 { id: '.quote', text: getLang(sock).joke_btn_quote }, { id: '.joke',  text: getLang(sock).quote_btn_joke },
