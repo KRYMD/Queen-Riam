@@ -259,3 +259,6 @@ async function helpCommand(sock, chatId, message, _, subCategory) {
 }
 
 module.exports = helpCommand;
+module.exports.CATEGORIES = CATEGORIES;
+
+module.exports = helpCommand;

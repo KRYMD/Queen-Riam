@@ -9,6 +9,7 @@ if (_sessionManager) {
 }
 const getFakeVcard = require('../lib/fakeVcard');
 const { isButtonModeOn } = require('../lib/buttonHelper');
+const { normalizePairingNumber, parsePairingCode } = require('../lib/pairing');
 
 let sendButtons;
 try {
@@ -37,10 +38,10 @@ async function pairCommand(sock, chatId, message, args) {
         return;
     }
 
-    const raw = args[0]?.replace(/\D/g, '');
+    const raw = normalizePairingNumber(args[0]).replace(/^\+/, '');
 
     // Enforce pairing-number policy: require PAIRING_NUMBER to be configured
-    const configured = (global.PAIRING_NUMBER || '').replace(/[^0-9]/g, '');
+    const configured = normalizePairingNumber(global.PAIRING_NUMBER).replace(/^\+/, '');
     if (!configured) {
         await sock.sendMessage(chatId, { text: '❌ Pairing is disabled. Please set the PAIRING_NUMBER environment variable (your WhatsApp number without +) to enable pairing.' , ...channelInfo }, { quoted: getFakeVcard() });
         return;
@@ -69,7 +70,8 @@ async function pairCommand(sock, chatId, message, args) {
             return;
         }
 
-        const code = await generatePairingCode(raw);
+        const generated = await generatePairingCode(raw);
+        const code = parsePairingCode(generated);
 
         if (!code) {
             await sock.sendMessage(chatId, {

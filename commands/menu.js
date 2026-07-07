@@ -1,27 +1,61 @@
 const getFakeVcard = require('../lib/fakeVcard');
+const { buildMainMenuText } = require('../lib/menuBuilder');
+const { CATEGORIES } = require('./help');
+const { isButtonModeOn } = require('../lib/buttonHelper');
 
-// Delegates to the existing help command implementation so menu aliases work.
-module.exports = async function menuCommand(sock, chatId, message, args, maybeSub) {
+let sendButtons;
+try {
+    sendButtons = require('kango-wa').sendButtons;
+} catch (_) {
+    sendButtons = null;
+}
+
+function getChannelInfo() {
+    return {
+        contextInfo: {
+            forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '120363404284793169@newsletter',
+                newsletterName: '👑 NEGO NEXUS',
+                serverMessageId: -1,
+            },
+        },
+    };
+}
+
+module.exports = async function menuCommand(sock, chatId, message, args = []) {
     try {
-        const helpCommand = require('./help');
-
-        // Determine subcategory if provided either as arg array/string or in the message text
-        let sub = null;
-        if (typeof maybeSub === 'string' && maybeSub.trim()) sub = maybeSub.trim();
-        else if (typeof args === 'string' && args.trim()) {
-            const parts = args.trim().split(/\s+/);
-            if (parts.length > 0) sub = parts[0];
-        } else if (Array.isArray(args) && args.length > 0 && typeof args[0] === 'string') {
-            sub = args[0].trim();
-        } else if (message && message.message) {
-            // attempt to extract text from common WA message shapes
-            const convo = message.message.conversation || (message.message.extendedTextMessage && message.message.extendedTextMessage.text) || '';
-            const parts = (convo || '').trim().split(/\s+/);
-            if (parts.length > 1) sub = parts[1];
+        const sub = Array.isArray(args) ? args[0] : args;
+        if (sub && CATEGORIES[sub]) {
+            const helpCommand = require('./help');
+            await helpCommand(sock, chatId, message, null, sub);
+            return;
         }
 
-        // Call the help command with subcategory (helpCommand signature: (sock, chatId, message, _, subCategory))
-        await helpCommand(sock, chatId, message, null, sub);
+        const menuText = buildMainMenuText();
+        const channelInfo = getChannelInfo();
+
+        if (isButtonModeOn() && sendButtons) {
+            const buttons = [
+                { id: '.help', text: '📜 Full Help' },
+                ...Object.entries(CATEGORIES).map(([key, cat]) => ({
+                    id: `.help ${key}`,
+                    text: `${cat.emoji} ${cat.title}`,
+                })),
+            ];
+
+            await sendButtons(sock, chatId, {
+                text: `${menuText}\n\nTap a category below to open it.`,
+                footer: '👑 Queen Riam',
+                buttons,
+                quoted: getFakeVcard(),
+                contextInfo: channelInfo.contextInfo,
+            });
+            return;
+        }
+
+        await sock.sendMessage(chatId, { text: menuText, ...channelInfo }, { quoted: getFakeVcard() });
     } catch (err) {
         console.error('[MENU] Failed to run menu command:', err);
         try {
