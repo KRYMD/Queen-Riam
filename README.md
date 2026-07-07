@@ -106,8 +106,8 @@ npm start
 
 <p align="center">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=18&pause=1000&color=F94E8B&center=true&vCenter=true&width=500&lines=QUEEN+RIAM+MD;MADE+BY+HECTOR+MANUEL;THANKS+FOR+VISITING" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=18&pause=1000&color=F94E8B&center=true&vCenter=true&width=500&lines=QUEEN+RIAM+MD;POWERED+BY+NEGO;THANKS+FOR+VISITING" alt="Typing SVG" />
   </a>
 </p>
 
-<p align="center">Made with love in Ghana by Hector Manuel</p>
+<p align="center">Made with love in Ghana by NEGO</p>

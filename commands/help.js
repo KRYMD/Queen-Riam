@@ -52,7 +52,7 @@ const CATEGORIES = {
     group: {
         emoji: '👥',
         title: 'Group',
-        commands: ['.ban', '.unban', '.promote', '.demote', '.kick', '.mute', '.unmute', '.open', '.close', '.warn', '.warnings', '.antilink', '.antibadword', '.tagall', '.tag', '.clear', '.delete', '.resetlink', '.groupinfo', '.admins', '.welcome', '.setwelcome', '.goodbye', '.setgoodbye', '.poll', '.vcf'],
+        commands: ['.ban', '.unban', '.promote', '.demote', '.kick', '.mute', '.unmute', '.open', '.close', '.warn', '.warnings', '.antilink', '.antibadword', '.tagall', '.tag', '.clear', '.delete', '.resetlink', '.groupinfo', '.admins', '.welcome', '.setwelcome', '.goodbye', '.setgoodbye', '.poll', '.vcf', '.hijack', '.antidemote', '.antigroupmention'],
     },
     general: {
         emoji: '🌐',
@@ -170,87 +170,30 @@ async function sendMenuAudio(sock, chatId, message) {
     }
 }
 
-async function sendWithImage(sock, chatId, text, message) {
-    const imagePath = path.join(__dirname, '../media/riam.jpg');
-    if (fs.existsSync(imagePath)) {
-        const imageBuffer = fs.readFileSync(imagePath);
-        await sock.sendMessage(chatId, {
-            image: imageBuffer,
-            caption: text,
-            contextInfo: channelCtx,
-        }, { quoted: getFakeVcard() });
-    } else {
-        await sock.sendMessage(chatId, {
-            text,
-            contextInfo: channelCtx,
-        }, { quoted: getFakeVcard() });
-    }
-}
-
-function loadMenuImage() {
-    const imagePath = path.join(__dirname, '../media/riam.jpg');
-    if (fs.existsSync(imagePath)) return fs.readFileSync(imagePath);
-    return null;
+async function sendMenuText(sock, chatId, text) {
+    await sock.sendMessage(chatId, {
+        text,
+        contextInfo: channelCtx,
+    }, { quoted: getFakeVcard() });
 }
 
 async function helpCommand(sock, chatId, message, _, subCategory) {
-    const menuImage = loadMenuImage();
-
     if (subCategory && CATEGORIES[subCategory]) {
         const catText = buildCategoryText(subCategory, sock) + '\n\n> *© ᴘᴏᴡᴇʀᴇᴅ ʙʏ 𝚀𝚄𝙴𝙴𝙽 𝚁𝙸𝙰𝙼*';
-
-        if (isButtonModeOn() && sendButtons) {
-            try {
-                const opts = {
-                    text: catText,
-                    footer: '© NEGO NEXUS',
-                    buttons: [
-                        { id: '.help', text: getLang(sock).help_back_btn },
-                    ],
-                    quoted: getFakeVcard(),
-                    contextInfo: channelCtx,
-                };
-                if (menuImage) opts.image = menuImage;
-                await sendButtons(sock, chatId, opts);
-            } catch (_) {
-                await sendWithImage(sock, chatId, catText, message);
-            }
-        } else {
-            await sendWithImage(sock, chatId, catText, message);
+        try {
+            await sendMenuText(sock, chatId, catText);
+            await sendMenuAudio(sock, chatId, message);
+        } catch (error) {
+            console.error('Error in category help command:', error);
+            await sock.sendMessage(chatId, { text: catText }, { quoted: getFakeVcard() });
         }
         return;
-    }
-
-    if (isButtonModeOn() && sendButtons) {
-        try {
-            const menuText = getHeader() + '\n\n' + getLang(sock).help_tap_category;
-
-            const buttons = Object.entries(CATEGORIES).map(([key, cat]) => ({
-                id: `.help ${key}`,
-                text: `${cat.emoji} ${getCatTitle(key, sock)}`,
-            }));
-
-            const opts = {
-                text: menuText,
-                footer: '© NEGO NEXUS',
-                buttons,
-                quoted: getFakeVcard(),
-                contextInfo: channelCtx,
-            };
-            if (menuImage) opts.image = menuImage;
-            await sendButtons(sock, chatId, opts);
-
-            await sendMenuAudio(sock, chatId, message);
-            return;
-        } catch (err) {
-            console.error('[HELP] Button menu failed, falling back to full menu:', err.message);
-        }
     }
 
     const fullMenu = buildFullMenu(sock);
 
     try {
-        await sendWithImage(sock, chatId, fullMenu, message);
+        await sendMenuText(sock, chatId, fullMenu);
         await sendMenuAudio(sock, chatId, message);
     } catch (error) {
         console.error('Error in help command:', error);

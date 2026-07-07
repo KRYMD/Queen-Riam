@@ -44,9 +44,8 @@ async function aliveCommand(sock, chatId, message) {
             `> ${t.alive_runtime} ${botUptime}\n` +
             `> ${platformEmoji} ${t.alive_platform} ${host}\n` +
             `> ${t.alive_node} ${nodeVersion}\n\n` +
-            `📢 Channel: https://whatsapp.com/channel/0029Va8YUl50bIdtVMYnYd0E\n\n` +
-                `*${settings.botName || "NEGO NEXUS"} ${t.alive_online}*\n\n` +
-            `> ${t.alive_powered} ${settings.ownerName || "Héctor Manuel"} 👑`;
+            `*${settings.botName || "NEGO NEXUS"} ${t.alive_online}*\n\n` +
+            `> ${t.alive_powered} ${settings.ownerName || "NEGO"} 👑`;
 
         if (isButtonModeOn()) {
             await sendButtonMessage(sock, chatId, {
